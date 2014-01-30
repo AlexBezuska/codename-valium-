@@ -7,7 +7,7 @@ var manifest = {
 		"player-run": "images/astro-run.png",
 	},
 	"sounds": {
-	//	"bg-music":	"audio/Jahzzar_-_02_-_Family_Tree.mp3"
+	
 	},
 	"fonts": [
 	]
