@@ -2,9 +2,11 @@ var canvas = document.getElementById("game");
 
 var manifest = {
 	"images": {
-		"bg": "images/valium-bg.png",
-		"wall": "images/valium-wall.png",
-		"player-run": "images/astro-run.png",
+		"bg": "images/bg.png",
+		"wall": "images/wall.png",
+		"player": "images/player.png",
+		"nurse": "images/nurse.png",
+		"npc": "images/npc.png"
 	},
 	"sounds": {
 	
@@ -52,12 +54,12 @@ function assetsLoaded() {
 	wall1 = new Splat.AnimatedEntity(0,159,wallAnim.width, wallAnim.height, wallAnim, 0,0);
 
 
-	playerRun = new Splat.makeAnimation(valium.images.get("player-run"), 8, 100);
+	playerRun = new Splat.makeAnimation(valium.images.get("player"), 1, 100);
 	player = new Splat.AnimatedEntity(50,50,playerRun.width-15, playerRun.height-15, playerRun, 0,0);
 	player.frictionX = .5;
 	player.frictionY = .5;
 
-	nurseWalk = new Splat.makeAnimation(valium.images.get("player-run"), 8, 100);
+	nurseWalk = new Splat.makeAnimation(valium.images.get("nurse"), 1, 100);
 	nurse = new Splat.AnimatedEntity(400,50,nurseWalk.width-15, nurseWalk.height-15, nurseWalk, 0,0);
 	//AnimatedEntity starting x, starting y, sprite width, sprite height, sprite, spriteOffsetX, spriteOffsetY
 	scene1.camera = new Splat.EntityBoxCamera(player, 400, canvas.height, canvas.width/2, canvas.height/2);
