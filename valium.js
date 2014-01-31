@@ -37,7 +37,7 @@ function(context) {
 loading.start();
 var wall1;
 
-
+var wall1Base = new Splat.Entity(0,342,1148, 28);
 var chaseSpeedX = .2;
 var chaseSpeedY = .2;
 var chaseDist = 300;
@@ -88,12 +88,19 @@ moveEntityViaKeyboard(player);
 nurse.move(elapsedMillis);
 
 if(nurse.collides(player)){
-		nurse.resolveCollisionWith(player);
-	}
+	nurse.resolveCollisionWith(player);
+}
+if(nurse.collides(wall1Base)){
+	nurse.resolveCollisionWith(wall1Base);
+}
 
-	if(player.collides(wall1)){
-		wall1.alpha(0.4);
-	}
+if(player.collides(wall1)){
+	wall1.alpha(0.4);
+}
+if(player.collides(wall1Base)){
+	player.resolveCollisionWith(wall1Base);
+}
+
 
 		chase(nurse, player, chaseDist);
 },
@@ -105,6 +112,6 @@ function(context) {
 	player.draw(context);
 	nurse.draw(context);
 	wall1.draw(context);
-	
+	wall1Base.draw(context);
 	
 });
