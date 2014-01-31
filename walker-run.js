@@ -55,12 +55,12 @@ function assetsLoaded() {
 
 
 	playerRun = new Splat.makeAnimation(valium.images.get("player"), 1, 100);
-	player = new Splat.AnimatedEntity(50,50,playerRun.width-15, playerRun.height-15, playerRun, 0,0);
+	player = new Splat.AnimatedEntity(50,50,playerRun.width, 25, playerRun, 0,-playerRun.height);
 	player.frictionX = .5;
 	player.frictionY = .5;
 
-	nurseWalk = new Splat.makeAnimation(valium.images.get("nurse"), 1, 100);
-	nurse = new Splat.AnimatedEntity(400,50,nurseWalk.width-15, nurseWalk.height-15, nurseWalk, 0,0);
+	nurseRun = new Splat.makeAnimation(valium.images.get("nurse"), 1, 100);
+	nurse = new Splat.AnimatedEntity(400,50,nurseRun.width, 25, nurseRun, 0,-nurseRun.height);
 	//AnimatedEntity starting x, starting y, sprite width, sprite height, sprite, spriteOffsetX, spriteOffsetY
 	scene1.camera = new Splat.EntityBoxCamera(player, 400, canvas.height, canvas.width/2, canvas.height/2);
 	
@@ -82,6 +82,8 @@ function moveEntityViaKeyboard(entity) {
 
 }
 
+
+
 scene1 = new Splat.Scene(canvas, function(elapsedMillis) {
 	//simulation function
 player.move(elapsedMillis);
@@ -98,6 +100,7 @@ if(nurse.collides(wall1Base)){
 
 if(player.collides(wall1)){
 	wall1.alpha(0.4);
+	//wall1.draw(context);
 }
 if(player.collides(wall1Base)){
 	player.resolveCollisionWith(wall1Base);
@@ -105,10 +108,16 @@ if(player.collides(wall1Base)){
 
 
 		chase(nurse, player, chaseDist);
+
+		
 },
 function(context) {
+	scene1.camera.drawAbsolute(context, function() {
+        context.fillStyle = "#74c5cd";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    });
 	//drawing function
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	
 	context.drawImage(valium.images.get("bg"), 0, 0);
 	
 	player.draw(context);
@@ -117,3 +126,5 @@ function(context) {
 	wall1Base.draw(context);
 	
 });
+
+ 
