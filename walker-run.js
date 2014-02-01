@@ -55,7 +55,7 @@ function assetsLoaded() {
 
 
 	playerRun = new Splat.makeAnimation(valium.images.get("player"), 1, 100);
-	player = new Splat.AnimatedEntity(50,50,playerRun.width, 25, playerRun, 0,-playerRun.height);
+	player = new Splat.AnimatedEntity(200,400,playerRun.width, 23, playerRun, 0,-135);
 	player.frictionX = .5;
 	player.frictionY = .5;
 
