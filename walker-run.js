@@ -47,7 +47,14 @@ var player;
 var nurse;
 var alphaMod;
 
-
+function drawEntities(context, entities) {
+	entities.sort(function(a, b) {
+		return a.y - b.y;
+	});
+	for (var i in entities) {
+		entities[i].draw(context);
+	}
+}
 
 function assetsLoaded() {
 	wallAnim = new Splat.makeAnimation(valium.images.get("wall"), 1, 100);
@@ -119,11 +126,13 @@ function(context) {
 	//drawing function
 	
 	context.drawImage(valium.images.get("bg"), 0, 0);
-	
-	player.draw(context);
-	nurse.draw(context);
-	wall1.draw(context);
-	wall1Base.draw(context);
+
+	var toDraw = [];
+	toDraw.push(player);
+	toDraw.push(nurse);
+	toDraw.push(wall1);
+	toDraw.push(wall1Base);
+	drawEntities(context, toDraw);
 	
 });
 
