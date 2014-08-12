@@ -506,16 +506,15 @@ function drawEntities(context, entities) {
 	}
 }
 
-
-
 function drawBoxes(context, entities, color) {
-	// entities.sort(function(a, b) {
-	// 	return (a.y + a.height) - (b.y + b.height);
-	// });
+	entities.sort(function(a, b) {
+		return (a.y + a.height) - (b.y + b.height);
+	});
 	for (var i = 0; i < entities.length; i++) {
-		context.strokeStyle = color;
+		context.fillStyle = "black";
 		context.lineWidth = 3;
-		context.strokeRect(context, entities[i].x, entities[i].y, entities[i].width, entities[i].height);
+		context.fillRect(entities[i].x, entities[i].y, entities[i].width, entities[i].height);
+
 	}
 }
 
@@ -651,15 +650,19 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		var animationTolerance = 0.1;
 		if (this.player.vy < -animationTolerance) {
 			this.playerWalk.current = "up";
+
 		}
 		if (this.player.vx < -animationTolerance) {
 			this.playerWalk.current = "left";
+
 		}
 		if (this.player.vx > animationTolerance) {
 			this.playerWalk.current = "right";
+
 		}
 		if (this.player.vy > animationTolerance) {
 			this.playerWalk.current = "down";
+
 		}
 		var currAnim;
 		if (typeof this.player.sprite.getCurrent === "function") {
@@ -727,9 +730,11 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 	function(context) {
 		// draw
 		this.camera.drawAbsolute(context, function() {
-			context.fillStyle = "#000";
+			context.fillStyle = "#c0c0c0";
 			context.fillRect(0, 0, canvas.width, canvas.height);
+			context.fillStyle = "#000";
 
+			drawBoxes(context, floorObstacles, '#000');
 		});
 		var drawables = this.drawables.slice(0);
 
@@ -741,11 +746,9 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		this.camera.drawAbsolute(context, function() {
 
 
-			context.fillStyle = "#ffffff";
-
 
 			context.fillText(Math.floor(scene.levelTime / 1000), 400, 50);
-			drawBoxes(context, floorObstacles, 'white');
+
 		});
 
 	}));
