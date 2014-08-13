@@ -29,22 +29,22 @@ var manifest = {
 	"animations": {
 		"player-male-walk-left": {
 			"strip": "img/player-male-walk-left.png",
-			"frames": 1,
+			"frames": 25,
 			"msPerFrame": 100
 		},
 		"player-male-walk-right": {
 			"strip": "img/player-male-walk-right.png",
-			"frames": 1,
+			"frames": 25,
 			"msPerFrame": 100
 		},
 		"player-male-walk-up": {
-			"strip": "img/player-male-walk-up.png",
-			"frames": 1,
+			"strip": "img/player-male-walk-left.png",
+			"frames": 25,
 			"msPerFrame": 100
 		},
 		"player-male-walk-down": {
-			"strip": "img/player-male-walk-down.png",
-			"frames": 1,
+			"strip": "img/player-male-walk-right.png",
+			"frames": 25,
 			"msPerFrame": 100
 		}
 	}
@@ -205,20 +205,7 @@ obstacle = new Splat.Entity(canvas.width - 108, -100, 108, canvas.height + 200);
 obstacle.adjustClick = adjustLeft;
 floorObstacles.push(obstacle);
 
-obstacle = new Splat.Entity(243, 108, 639, 60); //top machine
-obstacle.adjustClick = function(x, y, width, height, obstacle) {
-	var dropOffWidth = 54;
-	var enclosedWidth = 369;
-	var rightSide = obstacle.x + obstacle.width;
-	if (x + (width / 2) > rightSide) {
-		return adjustRight(x, y, width, height, obstacle);
-	} else if (x + (width / 2) < obstacle.x + 473) {
-		return [176, 130];
-	} else {
-		return adjustVertically(x, y, width, height, obstacle);
-	}
-};
-floorObstacles.push(obstacle);
+
 
 obstacle = new Splat.Entity(243, 324, 639, 60); //middle machine
 obstacle.adjustClick = function(x, y, width, height, obstacle) {
@@ -235,40 +222,17 @@ obstacle.adjustClick = function(x, y, width, height, obstacle) {
 };
 floorObstacles.push(obstacle);
 
-obstacle = new Splat.Entity(243, 540, 417, 60); //bottom machine
-obstacle.adjustClick = function(x, y, width, height, obstacle) {
-	var dropOffWidth = 54;
-	var enclosedWidth = 138;
-	var rightSide = obstacle.x + obstacle.width;
-	if (x + (width / 2) > rightSide) {
-		return adjustRight(x, y, width, height, obstacle);
-	} else if (x + (width / 2) < obstacle.x + 244) {
-		return [176, 563];
-	} else {
-		return adjustVertically(x, y, width, height, obstacle);
-	}
-};
-floorObstacles.push(obstacle);
 
-obstacle = new Splat.Entity(774, 540, 108, 60); // shredder
-obstacle.adjustClick = adjustHorizontally;
-floorObstacles.push(obstacle);
-
-// obstacle = new Splat.Entity(-100, 0, (canvas.width + 200), 60), // top border
-// obstacle.adjustClick = adjustDown;
-// floorObstacles.push(obstacle);
 
 obstacle = new Splat.Entity(-100, canvas.height, (canvas.width + 200), 60); // bottom border
 obstacle.adjustClick = adjustUp;
 floorObstacles.push(obstacle);
 
-obstacle = new Splat.Entity(0, 34, 141, 21); // left of door
+obstacle = new Splat.Entity(0, 34, canvas.width, 21); // left of door
 obstacle.adjustClick = adjustDown;
 floorObstacles.push(obstacle);
 
-obstacle = new Splat.Entity(249, 34, canvas.width, 21); // right of door
-obstacle.adjustClick = adjustDown;
-floorObstacles.push(obstacle);
+
 
 function makeIsWalkableForObstacles(player, obstacles) {
 	return function(x, y) {
@@ -317,19 +281,16 @@ function makeScriptPathTimer(player, path, targetX, targetY, playerWalk, playerC
 		}
 		if (pathVy < 0) {
 			playerWalk.current = "up";
-			playerCarry.current = "up";
 		}
 		if (pathVx < 0) {
 			playerWalk.current = "left";
-			playerCarry.current = "left";
 		}
 		if (pathVx > 0) {
 			playerWalk.current = "right";
-			playerCarry.current = "right";
+
 		}
 		if (pathVy > 0) {
 			playerWalk.current = "down";
-			playerCarry.current = "down";
 		}
 
 	}, undefined, undefined);
@@ -554,44 +515,45 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		this.playerWalk = new AnimationGroup();
 
 		var anim = game.animations.get("player-male-walk-up");
-		anim.setWidth = 65;
-		anim.setHeight = 20;
-		anim.setSpriteOffsetX = -10;
-		anim.setSpriteOffsetY = -85;
+		anim.setWidth = 90;
+		anim.setHeight = 50;
+		anim.setSpriteOffsetX = 0;
+		anim.setSpriteOffsetY = -251;
 		this.playerWalk.add("up", anim);
 
 		anim = game.animations.get("player-male-walk-down");
-		anim.setWidth = 65;
-		anim.setHeight = 20;
-		anim.setSpriteOffsetX = -10;
-		anim.setSpriteOffsetY = -85;
+		anim.setWidth = 90;
+		anim.setHeight = 50;
+		anim.setSpriteOffsetX = 0;
+		anim.setSpriteOffsetY = -251;
 		this.playerWalk.add("down", anim);
 
 		anim = game.animations.get("player-male-walk-left");
-		anim.setWidth = 65;
-		anim.setHeight = 20;
+		anim.setWidth = 90;
+		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -85;
+		anim.setSpriteOffsetY = -251;
 		this.playerWalk.add("left", anim);
 
 		anim = game.animations.get("player-male-walk-right");
-		anim.setWidth = 65;
-		anim.setHeight = 20;
-		anim.setSpriteOffsetX = -20;
-		anim.setSpriteOffsetY = -85;
+		anim.setWidth = 90;
+		anim.setHeight = 50;
+		anim.setSpriteOffsetX = 0;
+		anim.setSpriteOffsetY = -251;
 		this.playerWalk.add("right", anim);
 
 		this.playerWalk.current = "left";
 
-		anim.setWidth = 65;
-		anim.setHeight = 20;
-		anim.setSpriteOffsetX = -20;
-		anim.setSpriteOffsetY = -85;
+		anim.setWidth = 90;
+		anim.setHeight = 50;
+		anim.setSpriteOffsetX = 0;
+		anim.setSpriteOffsetY = -251;
 		anim.carryOffsetX = anim.width + anim.setSpriteOffsetX;
 		anim.carryOffsetY = 51 + anim.setSpriteOffsetY;
 
 
-		this.player = new Splat.AnimatedEntity(110, -250, 65, 20, this.playerWalk, -10, -85);
+
+		this.player = new Splat.AnimatedEntity(50, 50, 65, 20, this.playerWalk, -10, -85);
 		this.player.frictionX = 0.5;
 		this.player.frictionY = 0.5;
 		var oldPlayerDraw = this.player.draw;
@@ -613,7 +575,6 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 				this.y = 0;
 			}
 		}
-		this.playerHands = new Splat.Entity(this.player.x, this.player.y, 30, 30);
 
 
 
@@ -631,7 +592,7 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 
 
 
-		this.timers.playStep = new Splat.Timer(undefined, 100, function() {
+		this.timers.playStep = new Splat.Timer(undefined, 850, function() {
 			game.sounds.play(randomElement(stepSounds));
 			this.reset();
 			this.start();
@@ -687,7 +648,7 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		var dir = this.player.sprite.current;
 		var me = this.player;
 
-		this.camera.locked = true;
+
 		if (game.mouse.consumePressed(0)) {
 			//this.timers.path.stop();
 			this.nextPaths = [];
@@ -697,9 +658,9 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		}
 
 		if (game.keyboard.isPressed("r")) {
-			playerSpeed = 0.7;
+			playerSpeed = 0.25;
 		} else {
-			playerSpeed = 0.4;
+			playerSpeed = 0.15;
 		}
 		if (game.keyboard.isPressed("left") || game.keyboard.isPressed("a")) {
 			if (this.timers.path) {
@@ -728,6 +689,7 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 
 	},
 	function(context) {
+		var scene = this;
 		// draw
 		this.camera.drawAbsolute(context, function() {
 			context.fillStyle = "#c0c0c0";
@@ -735,19 +697,22 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 			context.fillStyle = "#000";
 
 			drawBoxes(context, floorObstacles, '#000');
+
 		});
 		var drawables = this.drawables.slice(0);
 
 
 		drawEntities(context, drawables);
 
-		var scene = this;
+
 
 		this.camera.drawAbsolute(context, function() {
 
 
 
 			context.fillText(Math.floor(scene.levelTime / 1000), 400, 50);
+			context.strokeStyle = "red";
+			context.strokeRect(scene.player.x, scene.player.y, scene.player.width, scene.player.height);
 
 		});
 
