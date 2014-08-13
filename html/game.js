@@ -518,28 +518,28 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		anim.setWidth = 90;
 		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -251;
+		anim.setSpriteOffsetY = -151;
 		this.playerWalk.add("up", anim);
 
 		anim = game.animations.get("player-male-walk-down");
 		anim.setWidth = 90;
 		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -251;
+		anim.setSpriteOffsetY = -151;
 		this.playerWalk.add("down", anim);
 
 		anim = game.animations.get("player-male-walk-left");
 		anim.setWidth = 90;
 		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -251;
+		anim.setSpriteOffsetY = -151;
 		this.playerWalk.add("left", anim);
 
 		anim = game.animations.get("player-male-walk-right");
 		anim.setWidth = 90;
 		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -251;
+		anim.setSpriteOffsetY = -151;
 		this.playerWalk.add("right", anim);
 
 		this.playerWalk.current = "left";
@@ -547,7 +547,7 @@ game.scenes.add("main", new Splat.Scene(canvas, function() {
 		anim.setWidth = 90;
 		anim.setHeight = 50;
 		anim.setSpriteOffsetX = 0;
-		anim.setSpriteOffsetY = -251;
+		anim.setSpriteOffsetY = -151;
 		anim.carryOffsetX = anim.width + anim.setSpriteOffsetX;
 		anim.carryOffsetY = 51 + anim.setSpriteOffsetY;
 
